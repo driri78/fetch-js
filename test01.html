@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>고객정보</h1>
+    <div class="log"></div>
+    <script>
+      fetch("./database/user.json")
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          document.querySelector(".log").innerHTML = `
+            이름 : ${res.name}
+            나이 : ${res.age}
+            주소 : ${res.addr}
+            `;
+        });
+    </script>
+  </body>
+</html>

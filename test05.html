@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .row {
+        display: grid;
+        grid-template-columns: 50px 300px 50px 50px;
+        margin-bottom: 50px;
+      }
+      .row input {
+        width: 20px;
+        height: 20px;
+      }
+      i {
+        cursor: pointer;
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todos">
+      <!-- <div class="row">
+            <div class="todoId"></div>
+            <div class="title"></div>
+            <input type="checkbox" checked="">
+        </div> -->
+    </div>
+    <script>
+      // 함수가 끝나면 가져온 데이터가 사라지므로 저장공간을 선언해서 저장한다
+      let todos = [];
+
+      function roadData() {
+        const url = "https://jsonplaceholder.typicode.com/todos";
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            todos = res;
+            console.log(todos);
+            printScreen(todos);
+          });
+      }
+      roadData();
+
+      function printScreen(arr) {
+        arr.forEach((data) => {
+          const str = `
+        <div class="row">
+            <div class="todoId">${data.id}</div>
+            <div class="title">${data.title}</div>
+            <input type="checkbox" ${data.completed ? "checked" : ""}>
+            <i class='bx bx-trash'></i>
+        </div>
+        
+            `;
+          document.querySelector(".todos").insertAdjacentHTML("beforeend", str);
+        });
+      }
+    </script>
+  </body>
+</html>

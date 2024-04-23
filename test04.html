@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <style>
+      .photos {
+        width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+      .card img {
+        width: 100%;
+      }
+      /* .title {
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      } */
+      .title {
+        width: 100%;
+        overflow: hidden;
+      }
+      @media screen and (max-width: 1200px) {
+        .photos {
+          width: 95%;
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media screen and (max-width: 670px) {
+        .photos {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="photos"></div>
+    <script>
+      // 함수가 끝나면 가져온 데이터가 사라지므로 저장공간을 선언해서 저장한다
+      let photos = [];
+
+      function roadData() {
+        const url = "https://jsonplaceholder.typicode.com/photos";
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            photos = res.slice(0, 100);
+            console.log(photos);
+            printScreen(photos);
+          });
+      }
+      roadData();
+
+      function stringLength(str) {
+        // str의 길이
+        // return str.length >= 20 ? str.substring(0, 20) : str;
+        return str.length >= 20 ? str.slice(0, 20) : str;
+      }
+
+      function printScreen(arr) {
+        arr.forEach((data) => {
+          const str = `
+            <div class="card">
+                <div class="postId">${data.id}</div>
+                <img src="${data.url}" alt="${data.title}">
+                <div class="title">${stringLength(data.title)}</div>
+            </div>
+            `;
+          document
+            .querySelector(".photos")
+            .insertAdjacentHTML("beforeend", str);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      RESTful Api : CRUD <br />
+      get: read <br />
+      post : create <br />
+      put : update <br />
+      delete : delete <br />
+    </div>
+    <script>
+      // request구성요소 => head body url, ... : POST할땐 body에 데이터를 넣어서 보낸다
+      const url = "https://jsonplaceholder.typicode.com/posts/50";
+
+      fetch(url, {
+        method: "DELETE",
+        // JSON.stringify(user) 은 문자열로 데이터를 보낸다는 뜻
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res));
+    </script>
+  </body>
+</html>

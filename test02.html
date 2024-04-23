@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>책 읽기</h1>
+    <div class="log"></div>
+    <script>
+      fetch("./database/string.txt")
+        .then((res) => res.text())
+        .then((res) => {
+          console.log(res);
+          document.querySelector(".log").innerHTML = res;
+        });
+    </script>
+    <!-- 직접 홈페이지아이콘을 클릭해서 실행하면 안나옴 -->
+  </body>
+</html>

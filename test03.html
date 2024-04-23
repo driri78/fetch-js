@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <style>
+      .row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+      }
+      .postId {
+        width: 50px;
+      }
+      .title {
+        width: 400px;
+      }
+      .body {
+        width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="posts">
+      <!-- <div class="row">
+        <div class="postId"></div>
+        <div class="title"></div>
+        <div class="body"></div>
+      </div> -->
+    </div>
+    <script>
+      // 함수가 끝나면 가져온 데이터가 사라지므로 저장공간을 선언해서 저장한다
+      let posts = [];
+
+      function roadData() {
+        const url = "https://jsonplaceholder.typicode.com/posts";
+
+        fetch(url)
+          .then((res) => res.json())
+          .then((res) => {
+            posts = res;
+            printScreen(posts);
+          });
+      }
+      roadData();
+
+      function printScreen(arr) {
+        arr.forEach((data) => {
+          const str = `
+            <div class="row">
+                <div class="postId">${data.id}</div>
+                <div class="title">${data.title}</div>
+                <div class="body">${data.body}</div>
+            </div>
+            `;
+          document.querySelector(".posts").insertAdjacentHTML("beforeend", str);
+        });
+      }
+    </script>
+  </body>
+</html>
